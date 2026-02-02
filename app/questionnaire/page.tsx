@@ -6,12 +6,14 @@ export default function QuestionnairePage() {
         Répondez à ces questions pour obtenir votre score de conformité immédiatement.
       </p>
 
-      {/* 
-         TODO : Remplace ce div par l'iframe de ton formulaire Tally 
-         que tu as créé sur tally.so
-      */}
-      <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden flex items-center justify-center border-2 border-dashed border-slate-300" style={{ height: '800px' }}>
-        <p className="text-slate-400">Le formulaire sera intégré ici (Via Tally)</p>
+      {/* Intégration du formulaire Tally */}
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden" style={{ height: '800px' }}>
+        <iframe 
+          src="https://tally.so/r/KY1BvM?transparentBackground=1" 
+          width="100%" 
+          height="100%" 
+          title="Audit NIS2"
+        ></iframe>
       </div>
     </div>
   );
