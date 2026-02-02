@@ -13,6 +13,13 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // --- AJOUTÉ : Désactiver la règle des apostrophes ---
+  {
+    rules: {
+      "react/no-unescaped-entities": "off"
+    }
+  }
+  // ----------------------------------------------
 ]);
 
 export default eslintConfig;
