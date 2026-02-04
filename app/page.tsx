@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-// C'est la nouvelle méthode pour gérer le titre et la description dans Next.js 13+
 export const metadata = {
   title: "NIS2Check - Votre conformité NIS2 en 10 minutes",
   description: "Évaluez votre conformité à la directive NIS2 gratuitement. Obtenez un plan d'action priorisé pour votre PME.",
@@ -86,7 +85,7 @@ export default function Home() {
               <div>
                 <div className="text-4xl mb-4">1️⃣</div>
                 <h3 className="text-lg font-bold mb-2">Répondez au questionnaire</h3>
-                <p className="text-slate-600">Environ 25 questions simples sur votre organisation et vos pratiques.</p>
+                <p className="text-slate-600">Environ 9 questions simples sur votre organisation et vos pratiques.</p>
               </div>
               <div>
                 <div className="text-4xl mb-4">2️⃣</div>
