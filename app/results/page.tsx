@@ -17,20 +17,26 @@ export default function ResultsPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const storedData = sessionStorage.getItem('nis2_answers');
+    // On emballe la logique dans une fonction interne pour satisfaire React
+    const processResults = () => {
+      const storedData = sessionStorage.getItem('nis2_answers');
 
-    if (storedData) {
-      try {
-        const decodedAnswers = JSON.parse(storedData);
-        setResult(calculateNIS2Score(decodedAnswers));
-      } catch (e) {
-        setError("Erreur de lecture des données.");
+      if (storedData) {
+        try {
+          const decodedAnswers = JSON.parse(storedData);
+          setResult(calculateNIS2Score(decodedAnswers));
+        } catch {
+          // On retire le 'e' inutilisé
+          setError("Erreur de lecture des données.");
+        }
+      } else {
+        setError("Aucune réponse trouvée. Veuillez passer par le questionnaire.");
       }
-    } else {
-      setError("Aucune réponse trouvée. Veuillez passer par le questionnaire.");
-    }
-  }, []);
+    };
 
+    processResults();
+  }, []);
+  
   if (!result && !error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-slate-600">
@@ -67,24 +73,24 @@ export default function ResultsPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8 text-center mb-8">
           <h1 className="text-3xl font-bold text-slate-900 mb-4">Résultat de votre Audit NIS2</h1>
           
-          <div className={`inline-block px-6 py-2 rounded-full font-bold text-lg mb-6 ${getStatusColor(result.status)}`}>
-            {result.status}
+          <div className={`inline-block px-6 py-2 rounded-full font-bold text-lg mb-6 ${getStatusColor(result!.status)}`}>
+            {result!.status}
           </div>
 
           <div className="relative w-48 h-48 mx-auto mb-6">
             <div className="w-full h-full rounded-full flex items-center justify-center border-8 border-slate-100">
-              <span className="text-5xl font-extrabold text-slate-900">{result.percentage}%</span>
+              <span className="text-5xl font-extrabold text-slate-900">{result!.percentage}%</span>
             </div>
           </div>
 
           <p className="text-slate-600">
-            Score : <strong>{result.totalScore}</strong> / {result.maxPossibleScore}.
+            Score : <strong>{result!.totalScore}</strong> / {result!.maxPossibleScore}.
           </p>
         </div>
 
         {/* Détails par catégorie */}
         <div className="grid md:grid-cols-2 gap-4">
-          {Object.entries(result.details).map(([category, scores]) => (
+          {Object.entries(result!.details).map(([category, scores]) => (
             <div key={category} className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
               <h3 className="font-bold text-lg text-slate-800 mb-2">{category}</h3>
               
