@@ -2,11 +2,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export const metadata = {
-  title: "NIS2Check - Votre conformité NIS2 en 10 minutes",
-  description: "Évaluez votre conformité à la directive NIS2 gratuitement. Obtenez un plan d'action priorisé pour votre PME.",
-};
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
