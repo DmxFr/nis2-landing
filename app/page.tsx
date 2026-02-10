@@ -1,4 +1,6 @@
+"use client";
 import Link from 'next/link';
+import { useState } from 'react';
 
 export const metadata = {
   title: "NIS2Check - Votre conformité NIS2 en 10 minutes",
