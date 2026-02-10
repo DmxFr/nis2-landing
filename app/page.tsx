@@ -24,10 +24,10 @@ export default function Home() {
       {/* Section Hero (Le Pitch) */}
       <main>
         <section className="pt-20 pb-16 sm:pt-32 sm:pb-24 text-center px-4">
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
-            La conformité <span className="text-blue-600">NIS2</span>,<br />
-            simple et accessible.
-          </h1>
+        <h1 className="text-4xl ...">
+         La conformité <span className="text-blue-600">NIS2 V3 - TEST</span>,<br />
+         simple et accessible.
+        </h1>
           <p className="max-w-2xl mx-auto text-xl text-slate-600 mb-10">
             La nouvelle directive européenne de cybersécurité devient obligatoire. 
             Évaluez votre niveau de conformité en 10 minutes, sans jargon juridique.
