@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "NIS2Check - Votre conformité NIS2 en 10 minutes",
-  description: "Évaluez votre conformité à la directive NIS2 gratuitement. Obtenez un plan d'action priorisé pour votre PME.",
+  description: "Évaluez votre conformité à la directive NIS2 gratuitement.",
 };
 
 export default function RootLayout({
@@ -31,4 +31,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}# Vercel needs a push
+}

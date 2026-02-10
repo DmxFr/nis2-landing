@@ -2,12 +2,21 @@
 import { useEffect, useState } from 'react';
 import { calculateNIS2Score } from '../../lib/scoring';
 
+// Type pour le résultat
+type ScoreResult = {
+  totalScore: number;
+  maxPossibleScore: number;
+  percentage: number;
+  status: string;
+  details: Record<string, { current: number; max: number }>;
+};
+
 export default function ResultsPage() {
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
+  // États typés correctement
+  const [result, setResult] = useState<ScoreResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // 1. Essayer de récupérer les réponses dans le "tiroir" du navigateur
     const storedData = sessionStorage.getItem('nis2_answers');
 
     if (storedData) {
@@ -18,12 +27,10 @@ export default function ResultsPage() {
         setError("Erreur de lecture des données.");
       }
     } else {
-      // Si le tiroir est vide
       setError("Aucune réponse trouvée. Veuillez passer par le questionnaire.");
     }
   }, []);
 
-  // Si on est en train de charger
   if (!result && !error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-slate-600">
@@ -32,7 +39,6 @@ export default function ResultsPage() {
     );
   }
 
-  // S'il y a une erreur
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center text-center px-4">
@@ -47,8 +53,7 @@ export default function ResultsPage() {
     );
   }
 
-  // Calcul de la couleur
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     if (status.includes("NON CONFORME")) return "text-red-600 bg-red-100";
     if (status.includes("PARTIELLEMENT")) return "text-orange-600 bg-orange-100";
     return "text-green-600 bg-green-100";

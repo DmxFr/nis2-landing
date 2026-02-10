@@ -1,8 +1,19 @@
 "use client";
+
 import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Home() {
+  // État pour le formulaire email
+  const [email, setEmail] = useState("");
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    alert(`Merci ! L'email ${email} a été enregistré.`);
+    setEmail(""); 
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Navigation simple */}
@@ -21,16 +32,16 @@ export default function Home() {
       {/* Section Hero (Le Pitch) */}
       <main>
         <section className="pt-20 pb-16 sm:pt-32 sm:pb-24 text-center px-4">
-        <h1 className="text-4xl ...">
-         La conformité <span className="text-blue-600">NIS2 V3 - TEST</span>,<br />
-         simple et accessible.
-        </h1>
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+            La conformité <span className="text-blue-600">NIS2</span>,<br />
+            simple et accessible.
+          </h1>
           <p className="max-w-2xl mx-auto text-xl text-slate-600 mb-10">
             La nouvelle directive européenne de cybersécurité devient obligatoire. 
             Évaluez votre niveau de conformité en 10 minutes, sans jargon juridique.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Link href="/questionnaire" className="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 transition text-lg">
               Lancer l'audit gratuit
             </Link>
@@ -38,6 +49,30 @@ export default function Home() {
               En savoir plus
             </Link>
           </div>
+
+          {/* --- Capture d'email --- */}
+          <div className="max-w-md mx-auto bg-blue-50 p-6 rounded-xl border border-blue-100">
+            <h3 className="font-bold text-slate-900 mb-2">Pas sûr d'avoir le temps ?</h3>
+            <p className="text-sm text-slate-600 mb-4">
+              Recevez notre <strong>Checklist PDF NIS2</strong> gratuite pour préparer votre mise en conformité.
+            </p>
+            <form onSubmit={handleEmailSubmit} className="flex gap-2">
+              <input 
+                type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="votre@email.com"
+                className="px-4 py-2 border rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <button type="submit" className="bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition">
+                Recevoir
+              </button>
+            </form>
+            <p className="text-xs text-slate-400 mt-2">Rejoignez +150 dirigeants qui utilisent nos ressources</p>
+          </div>
+          {/* ----------------------------------- */}
+
           <p className="mt-4 text-sm text-slate-500">Pas de carte bancaire requise • Résultat immédiat</p>
         </section>
 

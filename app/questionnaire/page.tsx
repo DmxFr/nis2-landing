@@ -6,34 +6,27 @@ import { QUESTIONS } from '../../lib/questions';
 export default function QuestionnairePage() {
   const router = useRouter();
   
-  // On stocke les réponses ici : { q1: "Oui", q2: "Non", ... }
-  const [answers, setAnswers] = useState({});
+  // État typé correctement
+  const [answers, setAnswers] = useState<Record<string, string>>({});
 
-  // Fonction quand l'utilisateur clique sur une réponse
-  const handleAnswer = (questionId, value) => {
+  const handleAnswer = (questionId: string, value: string) => {
     setAnswers(prev => ({
       ...prev,
       [questionId]: value
     }));
   };
 
-  // Fonction quand on clique sur "Valider"
   const handleSubmit = () => {
-    // Vérification simple : a-t-on répondu à tout ?
     const answeredCount = Object.keys(answers).length;
     if (answeredCount < QUESTIONS.length) {
       alert(`Vous avez répondu à ${answeredCount} questions sur ${QUESTIONS.length}. Merci de tout remplir.`);
       return;
     }
 
-    // SAUVEGARDE dans la mémoire du navigateur (SessionStorage)
     sessionStorage.setItem('nis2_answers', JSON.stringify(answers));
-
-    // Redirection simple
     router.push('/results');
   };
 
-  // Calcul de la progression
   const progress = Math.round((Object.keys(answers).length / QUESTIONS.length) * 100);
 
   return (
